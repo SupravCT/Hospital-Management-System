@@ -15,8 +15,8 @@ import Login from "./Pages/Login";
 import SymptomChatbot from "./components/SymptomChatbot";  
 import AppointmentList from "./components/AppointmentList";
 import Esewa from "./components/Esewa";
-import UserPortal from "./components/UserPortal";
-
+import UserPortal from "./components/UserPortal"; 
+// Placeholder components for missing routes
 const PaymentForm = () => <div>Payment Form Placeholder</div>;
 const PaymentSuccess = () => <div>Payment Success Placeholder</div>;
 const PaymentFailure = () => <div>Payment Failure Placeholder</div>;

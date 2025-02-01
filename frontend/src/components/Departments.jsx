@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const Departments = () => {
-  const [activeIndex, setActiveIndex] = useState(null); // Track which card is expanded
+  const [activeIndex, setActiveIndex] = useState(null); 
 
   const departmentsArray = [
     {
@@ -73,7 +73,7 @@ const Departments = () => {
   };
 
   const handleCardClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index); // Toggle the active card
+    setActiveIndex(index === activeIndex ? null : index); 
   };
 
   return (

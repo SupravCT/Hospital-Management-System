@@ -7,7 +7,7 @@ const UserPortal = () => {
   const [storedSymptoms, setStoredSymptoms] = useState([]); 
   const [sortOrder, setSortOrder] = useState("desc");
   const [sortKey, setSortKey] = useState("symptom"); 
-  const [appointments, setAppointments] = useState([]); 
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     console.log("User data:", user); 
@@ -22,10 +22,10 @@ const UserPortal = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`/api/v1/appointment/my-appointments`)
+        .get(`/api/v1/appointment/my-appointments`) 
         .then((response) => {
           console.log("API Response for Appointments:", response.data);
-          setAppointments(response.data.appointments || []); 
+          setAppointments(response.data.appointments || []);
         })
         .catch((error) => {
           console.error("Error fetching appointments:", error);
@@ -33,22 +33,22 @@ const UserPortal = () => {
     }
   }, [user]); 
 
- 
+
   const displayedSymptoms = [...storedSymptoms, ...symptomsResults];
 
   
   const handleSort = (key) => {
     if (sortKey === key) {
-      
+     
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
-      
+     
       setSortKey(key);
       setSortOrder("desc");
     }
   };
 
-  
+
   const filteredSymptoms = displayedSymptoms.filter(
     (symptom) => symptom.analyzedAt && symptom.analyzedAt !== "N/A"
   );
@@ -82,7 +82,7 @@ const UserPortal = () => {
       </div>
 
       <div className="user-details-card">
-       
+        
         <div className="user-details">
           <p>
             <strong>Phone:</strong> {user.phone || "N/A"}
@@ -96,7 +96,7 @@ const UserPortal = () => {
         </div>
       </div>
 
-   
+      
       {sortedSymptoms?.length > 0 && (
         <div className="symptoms-results">
           <h3>Analyzed Symptoms:</h3>
@@ -145,7 +145,6 @@ const UserPortal = () => {
         </div>
       )}
 
-    
       <div className="appointments-results">
   <h3>Your Appointments:</h3>
   {appointments?.length > 0 ? (

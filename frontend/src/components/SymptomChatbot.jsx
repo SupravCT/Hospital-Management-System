@@ -45,10 +45,10 @@ const SymptomChatbot = () => {
   
             setSymptomsResults(resultsWithTimestamp); 
   
-          
+            
             const currentSymptoms = JSON.parse(localStorage.getItem("symptomsResults")) || [];
             const updatedSymptoms = [...currentSymptoms, ...resultsWithTimestamp]; 
-            localStorage.setItem("symptomsResults", JSON.stringify(updatedSymptoms)); 
+            localStorage.setItem("symptomsResults", JSON.stringify(updatedSymptoms));
           } else {
             setSymptomsResults([]); 
             setError("No analysis results found.");

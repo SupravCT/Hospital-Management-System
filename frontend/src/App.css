@@ -9,8 +9,8 @@
 }
 
 body {
-  background: #B8E2C8; 
-  color: #333333; 
+  background: #B8E2C8; /* Light background */
+  color: #333333; /* Darker text for contrast */
   line-height: 1.6;
 }
 

@@ -22,7 +22,7 @@ const AppWrapper = () => {
         user,
         setUser,
         symptomsResults, 
-        setSymptomsResults, 
+        setSymptomsResults,
       }}
     >
       <App />
