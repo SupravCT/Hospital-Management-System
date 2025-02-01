@@ -15,8 +15,8 @@ import Login from "./Pages/Login";
 import SymptomChatbot from "./components/SymptomChatbot";  
 import AppointmentList from "./components/AppointmentList";
 import Esewa from "./components/Esewa";
-import UserPortal from "./components/UserPortal"; // Correct import
-// Placeholder components for missing routes
+import UserPortal from "./components/UserPortal";
+
 const PaymentForm = () => <div>Payment Form Placeholder</div>;
 const PaymentSuccess = () => <div>Payment Success Placeholder</div>;
 const PaymentFailure = () => <div>Payment Failure Placeholder</div>;
@@ -54,7 +54,7 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/user-portal" element={<UserPortal />} /> {/* New Route */}
+        <Route path="/user-portal" element={<UserPortal />} /> 
         <Route path="/esewa" element={<Esewa />} />
         <Route path="/payment-form" element={<PaymentForm />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />

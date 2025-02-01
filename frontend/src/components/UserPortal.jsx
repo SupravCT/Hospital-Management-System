@@ -1,64 +1,64 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../main"; // Import the context
-import axios from "axios"; // Import axios for API calls
+import { Context } from "../main"; 
+import axios from "axios"; 
 
 const UserPortal = () => {
-  const { user, symptomsResults = [] } = useContext(Context); // Ensure symptomsResults defaults to an empty array
-  const [storedSymptoms, setStoredSymptoms] = useState([]); // Local state to store symptomsResults from localStorage
-  const [sortOrder, setSortOrder] = useState("desc"); // Default sort order: descending
-  const [sortKey, setSortKey] = useState("symptom"); // Default sort key: symptom
-  const [appointments, setAppointments] = useState([]); // Local state for appointments
+  const { user, symptomsResults = [] } = useContext(Context);
+  const [storedSymptoms, setStoredSymptoms] = useState([]); 
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [sortKey, setSortKey] = useState("symptom"); 
+  const [appointments, setAppointments] = useState([]); 
 
   useEffect(() => {
-    console.log("User data:", user); // Log the user object
-    // Check if there are symptoms results in localStorage when the component mounts
+    console.log("User data:", user); 
+    
     const symptomsFromLocalStorage = localStorage.getItem("symptomsResults");
     if (symptomsFromLocalStorage) {
       setStoredSymptoms(JSON.parse(symptomsFromLocalStorage));
     }
   }, []);
 
-  // Fetch appointments for the logged-in user
+  
   useEffect(() => {
     if (user) {
       axios
-        .get(`/api/v1/appointment/my-appointments`) // Adjust the endpoint based on your API
+        .get(`/api/v1/appointment/my-appointments`)
         .then((response) => {
           console.log("API Response for Appointments:", response.data);
-          setAppointments(response.data.appointments || []); // Ensure appointments default to an empty array
+          setAppointments(response.data.appointments || []); 
         })
         .catch((error) => {
           console.error("Error fetching appointments:", error);
         });
     }
-  }, [user]); // Fetch appointments when user changes
+  }, [user]); 
 
-  // Combine the symptomsResults from context with the stored symptoms
+ 
   const displayedSymptoms = [...storedSymptoms, ...symptomsResults];
 
-  // Function to handle sorting based on selected key and order
+  
   const handleSort = (key) => {
     if (sortKey === key) {
-      // If the same column is clicked, toggle the order (asc/desc)
+      
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
-      // If a new column is clicked, set the new key and default to descending order
+      
       setSortKey(key);
       setSortOrder("desc");
     }
   };
 
-  // Filter out the symptoms that have "N/A" or no analyzedAt value
+  
   const filteredSymptoms = displayedSymptoms.filter(
     (symptom) => symptom.analyzedAt && symptom.analyzedAt !== "N/A"
   );
 
-  // Sort the symptomsResults based on the sort key and order
+  
   const sortedSymptoms = [...filteredSymptoms].sort((a, b) => {
     let valueA = a[sortKey];
     let valueB = b[sortKey];
 
-    // If sorting by date, ensure the dates are compared correctly
+   
     if (sortKey === "analyzedAt") {
       valueA = new Date(valueA);
       valueB = new Date(valueB);
@@ -82,7 +82,7 @@ const UserPortal = () => {
       </div>
 
       <div className="user-details-card">
-        {/* Display user details */}
+       
         <div className="user-details">
           <p>
             <strong>Phone:</strong> {user.phone || "N/A"}
@@ -96,7 +96,7 @@ const UserPortal = () => {
         </div>
       </div>
 
-      {/* Conditionally render the symptoms results */}
+   
       {sortedSymptoms?.length > 0 && (
         <div className="symptoms-results">
           <h3>Analyzed Symptoms:</h3>
@@ -145,7 +145,7 @@ const UserPortal = () => {
         </div>
       )}
 
-      {/* Display Appointments */}
+    
       <div className="appointments-results">
   <h3>Your Appointments:</h3>
   {appointments?.length > 0 ? (
@@ -180,10 +180,6 @@ const UserPortal = () => {
     <p>No appointments to display yet.</p>
   )}
 </div>
-
-        
-    
-      
     </div>
   );
 };
